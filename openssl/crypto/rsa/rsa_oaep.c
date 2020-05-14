@@ -34,8 +34,16 @@ int RSA_padding_add_PKCS1_OAEP(unsigned char *to, int tlen,
                                const unsigned char *from, int flen,
                                const unsigned char *param, int plen)
 {
-    return RSA_padding_add_PKCS1_OAEP_mgf1(to, tlen, from, flen,
-                                           param, plen, NULL, NULL);
+    return RSA_padding_add_PKCS1_OAEP_mgf1(to, tlen, from, flen, param, plen,
+                                           EVP_sha1(), EVP_sha1());
+}
+
+int RSA_padding_add_PKCS1_OAEP_256(unsigned char *to, int tlen,
+                                   const unsigned char *from, int flen,
+                                   const unsigned char *param, int plen)
+{
+    return RSA_padding_add_PKCS1_OAEP_mgf1(to, tlen, from, flen, param, plen,
+                                           EVP_sha256(), EVP_sha256());
 }
 
 int RSA_padding_add_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
@@ -109,8 +117,17 @@ int RSA_padding_check_PKCS1_OAEP(unsigned char *to, int tlen,
                                  const unsigned char *from, int flen, int num,
                                  const unsigned char *param, int plen)
 {
-    return RSA_padding_check_PKCS1_OAEP_mgf1(to, tlen, from, flen, num,
-                                             param, plen, NULL, NULL);
+    return RSA_padding_check_PKCS1_OAEP_mgf1(to, tlen, from, flen, num, param,
+                                             plen, EVP_sha1(), EVP_sha1());
+}
+
+int RSA_padding_check_PKCS1_OAEP_256(unsigned char *to, int tlen,
+                                     const unsigned char *from, int flen,
+                                     int num,
+                                     const unsigned char *param, int plen)
+{
+    return RSA_padding_check_PKCS1_OAEP_mgf1(to, tlen, from, flen, num, param,
+                                             plen, EVP_sha256(), EVP_sha256());
 }
 
 int RSA_padding_check_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
