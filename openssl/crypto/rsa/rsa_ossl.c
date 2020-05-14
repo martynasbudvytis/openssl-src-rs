@@ -110,6 +110,9 @@ static int rsa_ossl_public_encrypt(int flen, const unsigned char *from,
     case RSA_PKCS1_OAEP_PADDING:
         i = RSA_padding_add_PKCS1_OAEP(buf, num, from, flen, NULL, 0);
         break;
+    case RSA_PKCS1_OAEP_256_PADDING:
+        i = RSA_padding_add_PKCS1_OAEP_256(buf, num, from, flen, NULL, 0);
+        break;
     case RSA_SSLV23_PADDING:
         i = RSA_padding_add_SSLv23(buf, num, from, flen);
         break;

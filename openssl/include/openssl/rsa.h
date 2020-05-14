@@ -182,15 +182,16 @@ extern "C" {
 
 # define EVP_PKEY_CTRL_RSA_KEYGEN_PRIMES  (EVP_PKEY_ALG_CTRL + 13)
 
-# define RSA_PKCS1_PADDING       1
-# define RSA_SSLV23_PADDING      2
-# define RSA_NO_PADDING          3
-# define RSA_PKCS1_OAEP_PADDING  4
-# define RSA_X931_PADDING        5
+# define RSA_PKCS1_PADDING           1
+# define RSA_SSLV23_PADDING          2
+# define RSA_NO_PADDING              3
+# define RSA_PKCS1_OAEP_PADDING      4
+# define RSA_PKCS1_OAEP_256_PADDING  7
+# define RSA_X931_PADDING            5
 /* EVP_PKEY_ only */
-# define RSA_PKCS1_PSS_PADDING   6
+# define RSA_PKCS1_PSS_PADDING       6
 
-# define RSA_PKCS1_PADDING_SIZE  11
+# define RSA_PKCS1_PADDING_SIZE      11
 
 # define RSA_set_app_data(s,arg)         RSA_set_ex_data(s,0,arg)
 # define RSA_get_app_data(s)             RSA_get_ex_data(s,0)
@@ -347,7 +348,13 @@ int PKCS1_MGF1(unsigned char *mask, long len, const unsigned char *seed,
 int RSA_padding_add_PKCS1_OAEP(unsigned char *to, int tlen,
                                const unsigned char *f, int fl,
                                const unsigned char *p, int pl);
+int RSA_padding_add_PKCS1_OAEP_256(unsigned char *to, int tlen,
+                               const unsigned char *f, int fl,
+                               const unsigned char *p, int pl);
 int RSA_padding_check_PKCS1_OAEP(unsigned char *to, int tlen,
+                                 const unsigned char *f, int fl, int rsa_len,
+                                 const unsigned char *p, int pl);
+int RSA_padding_check_PKCS1_OAEP_256(unsigned char *to, int tlen,
                                  const unsigned char *f, int fl, int rsa_len,
                                  const unsigned char *p, int pl);
 int RSA_padding_add_PKCS1_OAEP_mgf1(unsigned char *to, int tlen,
